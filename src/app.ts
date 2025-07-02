@@ -16,6 +16,9 @@ app.post("/teste", (req, res) => {
 
   res.status(200).send();
 });
+app.get("/", (req, res) => {
+  res.send("Railway funcionando normalmente");
+});
 
 app.use(cookieParser());
 app.use(errorHandler);
