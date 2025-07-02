@@ -2,12 +2,13 @@
   "name": "juscashcase",
   "version": "1.0.0",
   "description": "Case teste técnico JusCash",
-  "main": "src/app.ts",
+  "main": "dist/app.js",
   "type": "module",
   "scripts": {
     "dev": "ts-node-dev --require tsconfig-paths/register --respawn --transpile-only src/app.ts",
     "build": "tsc",
-    "start": "node -r tsconfig-paths/register dist/app.js"
+    "start": "node -r tsconfig-paths/register dist/app.js",
+    "postinstall": "npm run build"
   },
   "author": "",
   "license": "ISC",
