@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { z } from "zod";
 import { makeRegisterUseCase } from "@/use-cases/factories/make-register-use-case.js";
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error.js";
