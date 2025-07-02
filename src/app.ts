@@ -20,7 +20,6 @@ app.post("/teste", (req, res) => {
 app.use(cookieParser());
 app.use(errorHandler);
 
-app.listen(
-  process.env.PORT,
-  () => `server running on port ${process.env.PORT}`
+app.listen(process.env.PORT, () =>
+  console.log(`server running on port ${process.env.PORT}`)
 );
