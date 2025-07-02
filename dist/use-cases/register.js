@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterUseCase = void 0;
+const user_already_exists_error_js_1 = require("@/use-cases/errors/user-already-exists-error.js");
 const bcryptjs_1 = require("bcryptjs");
 class RegisterUseCase {
     constructor(usersRepository) {
@@ -19,9 +20,9 @@ class RegisterUseCase {
         return __awaiter(this, void 0, void 0, function* () {
             const password_hash = yield (0, bcryptjs_1.hash)(password, 6);
             const userWithSameEmail = yield this.usersRepository.findByEmail(email);
-            // if (userWithSameEmail) {
-            //   throw new UserAlreadyExistsError();
-            // }
+            if (userWithSameEmail) {
+                throw new user_already_exists_error_js_1.UserAlreadyExistsError();
+            }
             const user = yield this.usersRepository.create({
                 name,
                 email,

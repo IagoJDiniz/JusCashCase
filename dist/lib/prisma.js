@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.prisma = void 0;
-const env_1 = require("@/env");
-const client_1 = require("@/generated/prisma/client");
-exports.prisma = new client_1.PrismaClient({
-    log: env_1.env.NODE_ENV === "dev" ? ["query"] : [],
+const index_js_1 = require("@/env/index.js");
+const client_js_1 = require("@/generated/prisma/client.js");
+exports.prisma = new client_js_1.PrismaClient({
+    log: index_js_1.env.NODE_ENV === "dev" ? ["query"] : [],
 });

@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error.js";
-import { makeAuthenticationUseCase } from "@/use-cases/factories/make-authentication-use-case.js";
+import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
+import { makeAuthenticationUseCase } from "@/use-cases/factories/make-authentication-use-case";
 import jwt from "jsonwebtoken";
 import {
   emailValidationSchema,
   passwordValidationSchema,
-} from "@/use-cases/validations/user-zod-schemas.js";
+} from "@/use-cases/validations/user-zod-schemas";
 
 const JWT_SECRET =
   process.env.JWT_SECRET ||

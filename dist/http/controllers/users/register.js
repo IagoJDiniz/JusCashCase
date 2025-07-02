@@ -11,8 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.register = void 0;
 const zod_1 = require("zod");
-const user_already_exists_error_1 = require("@/use-cases/errors/user-already-exists-error");
-const make_register_use_case_1 = require("@/use-cases/factories/make-register-use-case");
+const user_already_exists_error_1 = require("../../../use-cases/errors/user-already-exists-error");
+const make_register_use_case_1 = require("../../../use-cases/factories/make-register-use-case");
 function register(request, response) {
     return __awaiter(this, void 0, void 0, function* () {
         const registerBodySchema = zod_1.z.object({

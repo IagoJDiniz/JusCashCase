@@ -1,8 +1,8 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import routes from "./http/controllers/users/routes.js";
-import errorHandler from "./http/middlewares/error-handler.js";
+import routes from "./http/controllers/users/routes";
+import errorHandler from "./http/middlewares/error-handler";
 
 const app = express();
 

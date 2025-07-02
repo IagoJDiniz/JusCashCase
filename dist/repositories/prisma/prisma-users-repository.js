@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PrismaUsersRepository = void 0;
-const prisma_1 = require("@/lib/prisma");
+const prisma_js_1 = require("@/lib/prisma.js");
 class PrismaUsersRepository {
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield prisma_1.prisma.user.findUnique({
+            const user = yield prisma_js_1.prisma.user.findUnique({
                 where: {
                     id,
                 },
@@ -24,7 +24,7 @@ class PrismaUsersRepository {
     }
     findByEmail(email) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield prisma_1.prisma.user.findUnique({
+            const user = yield prisma_js_1.prisma.user.findUnique({
                 where: {
                     email,
                 },
@@ -34,7 +34,7 @@ class PrismaUsersRepository {
     }
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = yield prisma_1.prisma.user.create({
+            const user = yield prisma_js_1.prisma.user.create({
                 data,
             });
             return user;

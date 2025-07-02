@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.env = void 0;
-require("dotenv/config");
+require("dotenv/config.js");
 const zod_1 = require("zod");
 const envSchema = zod_1.z.object({
     NODE_ENV: zod_1.z.enum(["dev", "test", "production"]).default("dev"),
@@ -12,7 +12,7 @@ const envSchema = zod_1.z.object({
 });
 const _env = envSchema.safeParse(process.env);
 if (_env.success === false) {
-    console.error("❌ Invalid environment variables", _env.error.format());
-    throw new Error("Invalid environment variables.");
+    console.error("❌ Variáveis de ambiente incorretas", _env.error.format());
+    throw new Error("Variáveis de ambiente incorretas.");
 }
 exports.env = _env.data;
