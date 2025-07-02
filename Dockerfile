@@ -34,5 +34,8 @@ COPY package.json ./
 ENV PORT=3333
 EXPOSE 3333
 
+# Comando para iniciar o Prisma
+RUN npx prisma generate
+
 # Comando para iniciar a app
 CMD ["node", "dist/index.js"]
