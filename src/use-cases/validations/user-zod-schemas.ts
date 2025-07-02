@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { emailValidationRegex } from "/utils/regex-list";
+import { emailValidationRegex } from "@/utils/regex-list";
 
 //***************************************************************** */
 //Separando a validação de senha e email para unificar a lógica de validação

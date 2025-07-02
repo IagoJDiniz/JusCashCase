@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { z } from "zod";
-import { makeRegisterUseCase } from "/use-cases/factories/make-register-use-case";
-import { UserAlreadyExistsError } from "/use-cases/errors/user-already-exists-error";
+import { makeRegisterUseCase } from "@/use-cases/factories/make-register-use-case";
+import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
 import {
   emailValidationSchema,
   passwordValidationSchema,
-} from "/use-cases/validations/user-zod-schemas";
+} from "@/use-cases/validations/user-zod-schemas";
 
 export async function register(request: Request, response: Response) {
   //Validando utilizando schemas importados para unificar lógica de validação

@@ -2,7 +2,6 @@ import { Router, Request, Response } from "express";
 
 import { register } from "./register.controller";
 import { authenticate } from "./athentication.controller";
-import authenticateToken from "/http/middlewares/auth";
 
 const router = Router();
 
