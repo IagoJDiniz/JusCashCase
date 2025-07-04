@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@/generated/prisma/client";
+import { Post, Prisma } from "@/generated/prisma/client";
 
 import { PostsRepository } from "../posts-repository";
-import { parse } from "date-fns";
+import { RedisService } from "@/cache/redis/redis.service";
+import { RedisCacheRepository } from "@/cache/redis/redis-cache-repository";
 
 export class PrismaPostsRepository implements PostsRepository {
   async findById(id: string) {
@@ -60,5 +61,25 @@ export class PrismaPostsRepository implements PostsRepository {
     });
 
     return post;
+  }
+
+  async getFirstThirtyPosts(): Promise<Post[]> {
+    const redisService = new RedisService();
+    const cache = new RedisCacheRepository(redisService);
+
+    const cacheHit = await cache.getValue("first-posts");
+    if (cacheHit) {
+      const cachedData = JSON.parse(cacheHit) as Post[];
+      return cachedData;
+    }
+
+    const posts = await prisma.post.findMany({
+      skip: 0,
+      take: 30,
+    });
+
+    await cache.setValue("first-posts", JSON.stringify(posts));
+
+    return posts;
   }
 }

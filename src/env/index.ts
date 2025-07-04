@@ -8,6 +8,9 @@ const envSchema = z.object({
   BODY_DECRYPTION_KEY: z.string(),
   PORT: z.coerce.number().default(3333),
   SCRAPER_API_KEY: z.string(),
+  REDIS_HOST: z.string(),
+  REDIS_PORT: z.string(),
+  REDIS_PASSWORD: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);

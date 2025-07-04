@@ -11,4 +11,5 @@ export interface PostsRepository {
     textToSearch?: string
   ): Promise<Post[]>;
   create(data: Prisma.PostCreateInput): Promise<Post>;
+  getFirstThirtyPosts(): Promise<Post[]>;
 }

@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { makeRegisterPostsUseCase } from "@/use-cases/factories/make-register-posts-use-case";
-import { makeGetPostsUseCase } from "@/use-cases/factories/make-get-posts-use-case";
+import {
+  makeGetFirstPostsUseCase,
+  makeGetPostsUseCase,
+} from "@/use-cases/factories/make-get-posts-use-case";
 import { GetPostsUseCase } from "@/use-cases/get-posts";
 import { z } from "zod";
 
@@ -23,7 +26,18 @@ export async function saveLastDayPosts(request: Request, response: Response) {
   response.status(201).send({ message: "Posts cadastrados com sucesso!" });
 }
 
-export async function getPosts(request: Request, response: Response) {
+export async function getFirstPosts(request: Request, response: Response) {
+  try {
+    const getFirstPostsUseCase = makeGetFirstPostsUseCase();
+    const posts = await getFirstPostsUseCase.execute();
+    response.status(200).send({ data: posts });
+  } catch (err) {
+    console.log("erro no getFirstPosts:", err);
+    throw err;
+  }
+}
+
+export async function filterPosts(request: Request, response: Response) {
   //Buscando os posts
 
   const getPostsBodySchema = z.object({
@@ -53,9 +67,8 @@ export async function getPosts(request: Request, response: Response) {
       textToSearch: textToSearch,
     });
 
-    response.status(200).send({ posts });
+    response.status(200).send({ data: posts });
   } catch (err) {
-    console.log("erro no getPosts:", err);
     throw err;
   }
 }
