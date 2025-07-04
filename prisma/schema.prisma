@@ -5,14 +5,21 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
   binaryTargets = ["native", "windows", "linux-musl"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum PostStatus {
+  NEW
+  READED
+  SENT
+  DONE
 }
 
 model User {
@@ -23,4 +30,26 @@ model User {
   created_at    DateTime @default(now())
 
   @@map("users")
+}
+
+model Post {
+  id                            String     @id @default(uuid())
+  text                          String
+  numero_processo               String?
+  autores                       String[]
+  advogados                     String[]
+  valor_principal_bruto_liquido String? //Utilizei string nos valores pois como são valores imutáveis,
+  valor_juros_moratorios        String? //não necessitam de cálculos e podem ser armazenados como texto
+  honorarios_advocaticios       String?
+  reu                           String?    @default("Instituto Nacional do Seguro Social - INSS")
+  data_publicacao               DateTime   @db.Date
+  created_at                    DateTime   @default(now())
+  updated_at                    DateTime   @default(now()) @updatedAt
+  status                        PostStatus @default(NEW)
+
+  @@index([data_publicacao]) // indexação para facilitar busca 
+  @@index([autores])
+  @@index([advogados])
+  @@index([numero_processo])
+  @@map("posts")
 }

@@ -1,24 +1,17 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import routes from "./http/controllers/users/routes";
+import userRoutes from "./http/controllers/users/routes";
+import postRoutes from "./http/controllers/posts/routes";
 import errorHandler from "./http/middlewares/error-handler";
 
 const app = express();
 
+//A quantidade de posts era muito grande, então aumentei o limite de requisição
 app.use(express.json({ limit: "50mb" }));
 
-app.use(routes);
-app.post("/teste", (req, res) => {
-  const { data } = req.body;
-
-  console.table(data);
-
-  res.status(200).send();
-});
-app.get("/", (req, res) => {
-  res.send("Railway funcionando normalmente");
-});
+app.use(userRoutes);
+app.use(postRoutes);
 
 app.use(cookieParser());
 app.use(errorHandler);

@@ -1,0 +1,61 @@
+import { Request, Response } from "express";
+import { makeRegisterPostsUseCase } from "@/use-cases/factories/make-register-posts-use-case";
+import { makeGetPostsUseCase } from "@/use-cases/factories/make-get-posts-use-case";
+import { GetPostsUseCase } from "@/use-cases/get-posts";
+import { z } from "zod";
+
+export async function saveLastDayPosts(request: Request, response: Response) {
+  //Salvando os posts do último dia
+
+  const { posts } = request.body;
+
+  try {
+    //Criando o use case de forma externa para modularizar o uso de ORM's e repositórios
+    const registerUseCase = makeRegisterPostsUseCase();
+    await registerUseCase.execute({
+      posts,
+    });
+  } catch (err) {
+    console.log("erro no post:", err);
+    throw err;
+  }
+
+  response.status(201).send({ message: "Posts cadastrados com sucesso!" });
+}
+
+export async function getPosts(request: Request, response: Response) {
+  //Buscando os posts
+
+  const getPostsBodySchema = z.object({
+    skip: z.coerce.number().optional().default(0),
+    take: z.coerce.number().optional().default(30),
+    startDate: z.coerce
+      .date()
+      .optional()
+      .default(new Date("2024-10-01T00:00:00.000Z")),
+    endDate: z.coerce
+      .date()
+      .optional()
+      .default(new Date("2024-11-29T00:00:00.000Z")),
+    textToSearch: z.string().optional(),
+  });
+
+  const { skip, take, startDate, endDate, textToSearch } =
+    getPostsBodySchema.parse(request.query);
+
+  try {
+    const getPostsUseCase = makeGetPostsUseCase();
+    const posts = await getPostsUseCase.execute({
+      skip,
+      take,
+      startDate: startDate,
+      endDate: endDate,
+      textToSearch: textToSearch,
+    });
+
+    response.status(200).send({ posts });
+  } catch (err) {
+    console.log("erro no getPosts:", err);
+    throw err;
+  }
+}

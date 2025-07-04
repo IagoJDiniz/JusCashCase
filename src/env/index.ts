@@ -7,6 +7,7 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   BODY_DECRYPTION_KEY: z.string(),
   PORT: z.coerce.number().default(3333),
+  SCRAPER_API_KEY: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);
