@@ -82,4 +82,17 @@ export class PrismaPostsRepository implements PostsRepository {
 
     return posts;
   }
+
+  async update(id: string, status: Post["status"]) {
+    const post = await prisma.post.update({
+      where: {
+        id,
+      },
+      data: {
+        status,
+      },
+    });
+
+    return post;
+  }
 }

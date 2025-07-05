@@ -1,4 +1,4 @@
-import { Prisma, Post } from "@/generated/prisma/client";
+import { Prisma, Post, PostStatus } from "@/generated/prisma/client";
 
 export interface PostsRepository {
   findById(id: string): Promise<Post | null>;
@@ -12,4 +12,5 @@ export interface PostsRepository {
   ): Promise<Post[]>;
   create(data: Prisma.PostCreateInput): Promise<Post>;
   getFirstThirtyPosts(): Promise<Post[]>;
+  update(id: string, state: PostStatus): Promise<Post>;
 }

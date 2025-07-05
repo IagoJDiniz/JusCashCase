@@ -6,6 +6,9 @@ import {
 } from "@/use-cases/factories/make-get-posts-use-case";
 import { GetPostsUseCase } from "@/use-cases/get-posts";
 import { z } from "zod";
+import { makeUpdatePostUseCase } from "@/use-cases/factories/make-update-post-use-case";
+import { PostNotFoundError } from "@/use-cases/errors/post-not-found";
+import { InvalidPostTransitionError } from "@/use-cases/errors/invalid-post-transition-error";
 
 export async function saveLastDayPosts(request: Request, response: Response) {
   //Salvando os posts do último dia
@@ -33,6 +36,29 @@ export async function getFirstPosts(request: Request, response: Response) {
     response.status(200).send({ data: posts });
   } catch (err) {
     console.log("erro no getFirstPosts:", err);
+    throw err;
+  }
+}
+
+export async function updatePostState(request: Request, response: Response) {
+  //Atualizando o estado do post
+
+  const { status, id } = request.body;
+
+  try {
+    const updatePostUseCase = makeUpdatePostUseCase();
+    const post = await updatePostUseCase.execute({ id, status });
+
+    response.status(200).send({ data: post });
+  } catch (err) {
+    if (err instanceof PostNotFoundError) {
+      response.status(404).json({ message: err.message }).send();
+      return;
+    }
+    if (err instanceof InvalidPostTransitionError) {
+      response.status(403).json({ message: err.message }).send();
+      return;
+    }
     throw err;
   }
 }
