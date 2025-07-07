@@ -1,6 +1,8 @@
 import { PostsRepository } from "@/repositories/posts-repository";
 import { Post } from "@/generated/prisma/client";
 import { addHours, parse } from "date-fns";
+import { RedisService } from "@/cache/redis/redis.service";
+import { RedisCacheRepository } from "@/cache/redis/redis-cache-repository";
 
 interface RegisterPostsUseCaseRequest {
   posts: {
@@ -25,6 +27,9 @@ export class RegisterPostsUseCase {
   async execute({
     posts,
   }: RegisterPostsUseCaseRequest): Promise<RegisterPostsUseCaseResponse> {
+    const redisService = new RedisService();
+    const cache = new RedisCacheRepository(redisService);
+
     const registeredPosts: Post[] = [];
     for (const postData of posts) {
       const newPost = await this.postsRepository.create({
@@ -42,6 +47,8 @@ export class RegisterPostsUseCase {
       });
       registeredPosts.push(newPost);
     }
+
+    await cache.deleteValue("first-posts");
 
     return {
       posts: registeredPosts,
