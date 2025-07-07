@@ -37,6 +37,29 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   - Cacheamento da rota principal de listagem de publicações para que a página inicial carregue sempre rápido mesmo com muitos usuários carregando
   - Uso do Prisma e indexação para agilizar as requisições
 
+## ⚙️ Instalação & execução
+  <p>Garanta que voce tem o Node LTS instalado e o docker</p>
+  - git clone https://github.com/IagoJDiniz/JusCashCase.git
+  - cd JusCashCase
+
+  - npm install
+  - docker compose up
+
+  <p>Crie um arquivo .env com as seguintes variáveis:</p>
+  <p>- NODE_ENV=dev</p>
+  <p>- JWT_SECRET=key</p>
+  <p>- DATABASE_URL="postgresql://postgres:docker@localhost:5432/juscash-case-backend-postgres?schema=public"</p>
+  <p>- BODY_DECRYPTION_KEY=key</p>
+  <p>- PORT=3333</p>
+  <p>- SCRAPER_API_KEY=290755df-40f9-4fbd-8bbe-dedfe0133564</p>
+  <p>- REDIS_HOST=localhost</p>
+  <p>- REDIS_PORT=6379</p>
+  <p>- REDIS_PASSWORD=password</p>
+
+  <p>Por fim:</p>
+  - npm run dev
+
+
 ## 📄 Documentação
 https://app.swaggerhub.com/apis-docs/warbdesenvolvimento/JuscashCase/1.0.0
 <p>
