@@ -13,4 +13,8 @@ export interface PostsRepository {
   create(data: Prisma.PostCreateInput): Promise<Post>;
   getFirstThirtyPosts(): Promise<Post[]>;
   update(id: string, state: PostStatus): Promise<Post>;
+  findByNumeroEData(
+    numero_processo: string,
+    data_publicacao: Date
+  ): Promise<Post | null>;
 }

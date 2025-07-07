@@ -106,4 +106,13 @@ export class PrismaPostsRepository implements PostsRepository {
 
     return post;
   }
+
+  async findByNumeroEData(numero_processo: string, data_publicacao: Date) {
+    return prisma.post.findFirst({
+      where: {
+        numero_processo,
+        data_publicacao,
+      },
+    });
+  }
 }

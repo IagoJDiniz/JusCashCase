@@ -32,6 +32,21 @@ export class RegisterPostsUseCase {
 
     const registeredPosts: Post[] = [];
     for (const postData of posts) {
+      const dataPublicacao = addHours(
+        parse(postData.data_publicacao, "dd/MM/yyyy", new Date()),
+        3
+      );
+
+      // Verifica se já existe um post com mesmo número de processo e data de publicação
+      const existingPost = await this.postsRepository.findByNumeroEData(
+        postData.numero_processo ?? "",
+        dataPublicacao
+      );
+
+      if (existingPost) {
+        continue; // já existe, pula para o próximo
+      }
+
       const newPost = await this.postsRepository.create({
         text: postData.text,
         numero_processo: postData.numero_processo,
