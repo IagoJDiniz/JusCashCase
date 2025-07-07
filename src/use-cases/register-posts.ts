@@ -1,6 +1,6 @@
 import { PostsRepository } from "@/repositories/posts-repository";
 import { Post } from "@/generated/prisma/client";
-import { parse, startOfDay } from "date-fns";
+import { addHours, parse } from "date-fns";
 
 interface RegisterPostsUseCaseRequest {
   posts: {
@@ -35,8 +35,9 @@ export class RegisterPostsUseCase {
         valor_principal_bruto_liquido: postData.valor_principal_bruto_liquido,
         valor_juros_moratorios: postData.valor_juros_moratorios,
         honorarios_advocaticios: postData.honorarios_advocaticios,
-        data_publicacao: startOfDay(
-          parse(postData.data_publicacao, "dd/MM/yyyy", new Date())
+        data_publicacao: addHours(
+          parse(postData.data_publicacao, "dd/MM/yyyy", new Date()), //Lidando com o UTC-3, diferença deploy
+          3
         ),
       });
       registeredPosts.push(newPost);
