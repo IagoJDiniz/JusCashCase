@@ -3,9 +3,9 @@
 <br/>
 
 <p align="center">
-<a href="#-sobre">Sobre</a>
-<a href="#-tecnologias">Tecnologias</a>
-<a href="#-funcionalidades-principais">Funcionalidades principais</a>
+<a href="#-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#-funcionalidades-principais">Funcionalidades principais</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#-implementações-para-melhoria-de-performance">Implementações para melhoria de performance</a>
 
 </p>
