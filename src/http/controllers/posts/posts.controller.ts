@@ -33,7 +33,7 @@ export async function getFirstPosts(request: Request, response: Response) {
   try {
     const getFirstPostsUseCase = makeGetFirstPostsUseCase();
     const posts = await getFirstPostsUseCase.execute();
-    response.status(200).send({ data: posts });
+    response.status(200).send({ ...posts });
   } catch (err) {
     console.log("erro no getFirstPosts:", err);
     throw err;
@@ -93,7 +93,7 @@ export async function filterPosts(request: Request, response: Response) {
       textToSearch: textToSearch,
     });
 
-    response.status(200).send({ data: posts });
+    response.status(200).send({ ...posts });
   } catch (err) {
     throw err;
   }

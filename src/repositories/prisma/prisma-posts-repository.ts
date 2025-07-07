@@ -50,6 +50,9 @@ export class PrismaPostsRepository implements PostsRepository {
             }
           : {}),
       },
+      orderBy: {
+        updated_at: "desc",
+      },
     });
 
     return posts;
@@ -76,6 +79,9 @@ export class PrismaPostsRepository implements PostsRepository {
     const posts = await prisma.post.findMany({
       skip: 0,
       take: 30,
+      orderBy: {
+        updated_at: "desc",
+      },
     });
 
     await cache.setValue("first-posts", JSON.stringify(posts));
@@ -84,6 +90,9 @@ export class PrismaPostsRepository implements PostsRepository {
   }
 
   async update(id: string, status: Post["status"]) {
+    const redisService = new RedisService();
+    const cache = new RedisCacheRepository(redisService);
+
     const post = await prisma.post.update({
       where: {
         id,
@@ -92,6 +101,8 @@ export class PrismaPostsRepository implements PostsRepository {
         status,
       },
     });
+
+    await cache.deleteValue("first-posts");
 
     return post;
   }
