@@ -38,7 +38,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   - Uso do Prisma e indexação para agilizar as requisições
 
 ## 📄 Documentação
-https://app.swaggerhub.com/apis/warbdesenvolvimento/JuscashCase/1.0.0
-
+https://app.swaggerhub.com/apis-docs/warbdesenvolvimento/JuscashCase/1.0.0
+<p>
+  
 front-end - https://github.com/IagoJDiniz/juscash-front/
-scraper - https://github.com/IagoJDiniz/dje-scraping
+</p>
+<p>scraper - https://github.com/IagoJDiniz/dje-scraping</p>
