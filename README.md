@@ -84,6 +84,8 @@ https://app.swaggerhub.com/apis-docs/warbdesenvolvimento/JuscashCase/1.0.0
 <br/>
 [Link do web scraper das publicações do DJE](https://github.com/IagoJDiniz/dje-scraping)
 <br/>
+<p>Estrutura do banco pode ser encontrado no prisma/schema.prisma</p>
+
 
 ## 📈 Pontos de melhoria
   - Criar endpoint para redefinição de senha com envio de email de confirmação
