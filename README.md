@@ -6,9 +6,10 @@
 <a href="#-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#-funcionalidades-principais">Funcionalidades principais</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-<a href="#-implementações-para-melhoria-de-performance">Implementações para melhoria de performance</a>
-<a href="#%EF%B8%8F-instalação--execução">Instalação e execução</a>
-<a href="#-documentação">Documentação</a>
+<a href="#-implementações-para-melhoria-de-performance">Implementações para melhoria de performance</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#%EF%B8%8F-instalação-e-execução">Instalação e execução</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#-documentação">Documentação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#-pontos-de-melhoria">Pontos de melhoria</a>
 
 </p>
 
@@ -41,7 +42,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   - Separação do script de scraping para facilitar troca do script para outra linguagem ou repositório se necessário
   - Como o scraper é executado diariamente e no mesmo intervalo optei por salvar dados novos apenas se não houver registros com a mesma combinação "data_publicação e numero_processo"(Orientação da minha esposa e ainda recebi uma palestra sobre o funcionamento do diário oficial)
 
-## ⚙️ Instalação & execução
+## ⚙️ Instalação e execução
   <p>Garanta que voce tem o Node LTS instalado e o docker</p>
   
   ```bash
