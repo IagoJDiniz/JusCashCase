@@ -42,32 +42,46 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## ⚙️ Instalação & execução
   <p>Garanta que voce tem o Node LTS instalado e o docker</p>
-  - git clone https://github.com/IagoJDiniz/JusCashCase.git
-  - cd JusCashCase
+  
+  ```bash
+git clone https://github.com/IagoJDiniz/JusCashCase.git
+cd JusCashCase
 
-  - npm install
-  - docker compose up
+npm install
 
-  <p>Crie um arquivo .env com as seguintes variáveis:</p>
-  <p>- NODE_ENV=dev</p>
-  <p>- JWT_SECRET=key</p>
-  <p>- DATABASE_URL="postgresql://postgres:docker@localhost:5432/juscash-case-backend-postgres?schema=public"</p>
-  <p>- BODY_DECRYPTION_KEY=key</p>
-  <p>- PORT=3333</p>
-  <p>- SCRAPER_API_KEY=290755df-40f9-4fbd-8bbe-dedfe0133564</p>
-  <p>- REDIS_HOST=localhost</p>
-  <p>- REDIS_PORT=6379</p>
-  <p>- REDIS_PASSWORD=password</p>
+docker compose up
+```
+
+  <p>Crie um arquivo .env com o seguinte padrão:</p>
+  
+  
+  ``` 
+  NODE_ENV=dev
+  JWT_SECRET=key
+  DATABASE_URL="postgresql://postgres:docker@localhost:5432/juscash-case-backend-postgres?schema=public"
+  BODY_DECRYPTION_KEY=key
+  PORT=3333
+  SCRAPER_API_KEY=290755df-40f9-4fbd-8bbe-dedfe0133564
+  REDIS_HOST=localhost
+  REDIS_PORT=6379
+  REDIS_PASSWORD=password
+  ```
 
   <p>Por fim:</p>
-  - npm run dev
+   
+  ``` 
+  npm run dev
+```
   <br/>
   <strong>Lembrando que o banco de dados nesse caso não estará populado, portanto é necessário configurar o repositório de scraping abaixo, rodar ele e aguardar a finalização</strong>
 
 ## 📄 Documentação
 https://app.swaggerhub.com/apis-docs/warbdesenvolvimento/JuscashCase/1.0.0
-<p>[Link do repositório Front-End](https://github.com/IagoJDiniz/juscash-front/)</p>
-<p>[Link do web scraper das publicações do DJE](https://github.com/IagoJDiniz/dje-scraping)</p>
+<br/>
+[Link do repositório Front-End](https://github.com/IagoJDiniz/juscash-front/)
+<br/>
+[Link do web scraper das publicações do DJE](https://github.com/IagoJDiniz/dje-scraping)
+<br/>
 
 ## 📈 Pontos de melhoria
   - Criar endpoint para redefinição de senha com envio de email de confirmação
