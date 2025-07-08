@@ -39,6 +39,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   - Cacheamento da rota principal de listagem de publicações para que a página inicial carregue sempre rápido mesmo com muitos usuários carregando
   - Uso do Prisma e indexação para agilizar as requisições
   - Separação do script de scraping para facilitar troca do script para outra linguagem ou repositório se necessário
+  - Como o scraper é executado diariamente e no mesmo intervalo optei por salvar dados novos apenas se não houver registros com a mesma combinação "data_publicação e numero_processo"(Orientação da minha esposa e ainda recebi uma palestra sobre o funcionamento do diário oficial)
 
 ## ⚙️ Instalação & execução
   <p>Garanta que voce tem o Node LTS instalado e o docker</p>
