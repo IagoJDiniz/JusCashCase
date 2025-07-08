@@ -75,4 +75,5 @@ front-end - https://github.com/IagoJDiniz/juscash-front/
   - Criar endpoint para redefinição de senha com envio de email de confirmação
   - Alterar busca dos filtros para valores exatos pois como advogados e autores são arrays de strings eles não buscam por trechos, apenas por valores exatos
   - Criar uma encriptação dos dados das requisições de autenticação para fazer uma dupla camada de proteção junto ao https
+  - Realizar a implementação de testes
 
