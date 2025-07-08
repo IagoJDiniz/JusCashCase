@@ -7,6 +7,8 @@
 <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#-funcionalidades-principais">Funcionalidades principais</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#-implementações-para-melhoria-de-performance">Implementações para melhoria de performance</a>
+<a href="#%EF%B8%8F-instalação--execução">Instalação e execução</a>
+<a href="#-documentação">Documentação</a>
 
 </p>
 
@@ -36,6 +38,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   - Indexação GIN no campo de texto postgres para acelerar a busca(Assim pude manter os dados mais organizados mas sem perder meu poder de busca)
   - Cacheamento da rota principal de listagem de publicações para que a página inicial carregue sempre rápido mesmo com muitos usuários carregando
   - Uso do Prisma e indexação para agilizar as requisições
+  - Separação do script de scraping para facilitar troca do script para outra linguagem ou repositório se necessário
 
 ## ⚙️ Instalação & execução
   <p>Garanta que voce tem o Node LTS instalado e o docker</p>
@@ -58,7 +61,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
   <p>Por fim:</p>
   - npm run dev
-
+  <strong>Lembrando que o banco de dados nesse caso não estará populado, portanto é necessário configurar o repositório de scraping abaixo, rodar ele e aguardar a finalização</strong>
 
 ## 📄 Documentação
 https://app.swaggerhub.com/apis-docs/warbdesenvolvimento/JuscashCase/1.0.0
@@ -67,3 +70,9 @@ https://app.swaggerhub.com/apis-docs/warbdesenvolvimento/JuscashCase/1.0.0
 front-end - https://github.com/IagoJDiniz/juscash-front/
 </p>
 <p>scraper - https://github.com/IagoJDiniz/dje-scraping</p>
+
+## 📈 Pontos de melhoria
+  - Criar endpoint para redefinição de senha com envio de email de confirmação
+  - Alterar busca dos filtros para valores exatos pois como advogados e autores são arrays de strings eles não buscam por trechos, apenas por valores exatos
+  - Criar uma encriptação dos dados das requisições de autenticação para fazer uma dupla camada de proteção junto ao https
+
