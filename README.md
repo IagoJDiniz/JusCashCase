@@ -61,19 +61,18 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
   <p>Por fim:</p>
   - npm run dev
+  <br/>
   <strong>Lembrando que o banco de dados nesse caso não estará populado, portanto é necessário configurar o repositório de scraping abaixo, rodar ele e aguardar a finalização</strong>
 
 ## 📄 Documentação
 https://app.swaggerhub.com/apis-docs/warbdesenvolvimento/JuscashCase/1.0.0
-<p>
-  
-front-end - https://github.com/IagoJDiniz/juscash-front/
-</p>
-<p>scraper - https://github.com/IagoJDiniz/dje-scraping</p>
+<p>[Link do repositório Front-End](https://github.com/IagoJDiniz/juscash-front/)</p>
+<p>[Link do web scraper das publicações do DJE](https://github.com/IagoJDiniz/dje-scraping)</p>
 
 ## 📈 Pontos de melhoria
   - Criar endpoint para redefinição de senha com envio de email de confirmação
   - Alterar busca dos filtros para valores exatos pois como advogados e autores são arrays de strings eles não buscam por trechos, apenas por valores exatos
   - Criar uma encriptação dos dados das requisições de autenticação para fazer uma dupla camada de proteção junto ao https
   - Realizar a implementação de testes
+  - Ajustar o projeto para fazer a documentação de forma automática
 
