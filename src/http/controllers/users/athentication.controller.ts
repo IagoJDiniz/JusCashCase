@@ -27,7 +27,7 @@ export async function authenticate(request: Request, response: Response) {
 
     const token = jwt.sign({ userName: user.name }, JWT_SECRET, {
       subject: user.id,
-      expiresIn: "15m",
+      expiresIn: "3d",
     });
 
     const refreshToken = jwt.sign({ userName: user.name }, JWT_SECRET, {
