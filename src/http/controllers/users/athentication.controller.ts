@@ -30,21 +30,7 @@ export async function authenticate(request: Request, response: Response) {
       expiresIn: "3d",
     });
 
-    const refreshToken = jwt.sign({ userName: user.name }, JWT_SECRET, {
-      subject: user.id,
-      expiresIn: "7d",
-    });
-
-    response
-      .cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        sameSite: "strict",
-        secure: true, // Use true if using HTTPS
-        path: "/",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dias
-      })
-      .status(200)
-      .json({ token });
+    response.status(200).json({ token });
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
       response.status(400).json({ message: err.message });
