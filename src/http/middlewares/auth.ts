@@ -20,7 +20,7 @@ function authenticateToken(
 
   jwt.verify(token, process.env.JWT_SECRET as string, (err, user) => {
     if (err) {
-      response.status(403).json({ message: "Token inválido" });
+      response.status(401).json({ message: "Token inválido" });
       return;
     } else {
       next();
