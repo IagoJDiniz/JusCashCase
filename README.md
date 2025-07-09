@@ -60,10 +60,10 @@ docker compose up
   ``` 
   NODE_ENV=dev
   JWT_SECRET=key
-  DATABASE_URL="postgresql://postgres:docker@localhost:5432/juscash-case-backend-postgres?schema=public"
+  DATABASE_URL=url_do_banco_com_user_e_senha_e_porta
   BODY_DECRYPTION_KEY=key
   PORT=3333
-  SCRAPER_API_KEY=290755df-40f9-4fbd-8bbe-dedfe0133564
+  SCRAPER_API_KEY=mesma_key_do_scraper
   REDIS_HOST=localhost
   REDIS_PORT=6379
   REDIS_PASSWORD=password
@@ -84,6 +84,8 @@ https://app.swaggerhub.com/apis-docs/warbdesenvolvimento/JuscashCase/1.0.0
 <br/>
 [Link do web scraper das publicações do DJE](https://github.com/IagoJDiniz/dje-scraping)
 <br/>
+<p>Estrutura do banco pode ser encontrado no prisma/schema.prisma</p>
+
 
 ## 📈 Pontos de melhoria
   - Criar endpoint para redefinição de senha com envio de email de confirmação
