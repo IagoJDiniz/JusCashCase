@@ -114,3 +114,19 @@ export async function getMe(request: Request, response: Response) {
     response.status(401).json({ message: "Token inválido ou expirado" });
   }
 }
+
+export async function logout(request: Request, response: Response) {
+  response.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  response.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  response.status(200).json({ message: "Logout realizado com sucesso" });
+}
