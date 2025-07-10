@@ -7,6 +7,7 @@ import { emailValidationSchema } from "@/use-cases/validations/user-zod-schemas"
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!;
+const isProduction = process.env.NODE_ENV === "production";
 
 export async function authenticate(request: Request, response: Response) {
   const authenticateBodySchema = z.object({
@@ -37,14 +38,14 @@ export async function authenticate(request: Request, response: Response) {
     response
       .cookie("accessToken", accessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         maxAge: 1000 * 60 * 15,
       })
       .cookie("refreshToken", refreshToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
+        secure: isProduction,
+        sameSite: isProduction ? "none" : "lax",
         maxAge: 1000 * 60 * 60 * 24 * 7,
       });
 
@@ -83,8 +84,8 @@ export async function refreshToken(request: Request, response: Response) {
 
     response.cookie("accessToken", newAccessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 1000 * 60 * 15,
     });
 
@@ -118,14 +119,14 @@ export async function getMe(request: Request, response: Response) {
 export async function logout(request: Request, response: Response) {
   response.clearCookie("accessToken", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "none",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
   });
 
   response.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "none",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
   });
 
   response.status(200).json({ message: "Logout realizado com sucesso" });
