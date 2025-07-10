@@ -4,10 +4,19 @@ import cors from "cors";
 import userRoutes from "./http/controllers/users/routes";
 import postRoutes from "./http/controllers/posts/routes";
 import errorHandler from "./http/middlewares/error-handler";
+import { env } from "./env";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      env.NODE_ENV === "production"
+        ? "https://juscash-front-production.up.railway.app/"
+        : "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 //A quantidade de posts era muito grande, então aumentei o limite de requisição
 app.use(express.json({ limit: "50mb" }));

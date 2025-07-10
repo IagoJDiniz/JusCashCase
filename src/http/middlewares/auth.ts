@@ -11,7 +11,6 @@ function authenticateToken(
   response: Response,
   next: NextFunction
 ) {
-  const authHeader = request.headers["authorization"];
   const token = request.cookies.accessToken;
 
   if (!token) {
