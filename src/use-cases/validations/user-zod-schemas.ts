@@ -8,7 +8,10 @@ import { emailValidationRegex } from "@/utils/regex-list";
 
 export const emailValidationSchema = z
   .string()
-  .regex(emailValidationRegex, "O e-mail deve seguir o padrão 'xxx@xxx.com'");
+  .regex(
+    emailValidationRegex,
+    "O e-mail deve seguir o padrão 'xxx@xxx.com' e sem letras maiúsculas"
+  );
 
 export const passwordValidationSchema = z
   .string()
