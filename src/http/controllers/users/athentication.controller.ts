@@ -93,3 +93,24 @@ export async function refreshToken(request: Request, response: Response) {
     response.status(401).json({ message: "Refresh token inválido" });
   }
 }
+
+export async function getMe(request: Request, response: Response) {
+  const token = request.cookies.accessToken;
+
+  if (!token) {
+    response.status(401).json({ message: "Não autenticado" });
+    return;
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as {
+      userName: string;
+    };
+
+    response.status(200).json({
+      name: decoded.userName,
+    });
+  } catch {
+    response.status(401).json({ message: "Token inválido ou expirado" });
+  }
+}
