@@ -12,7 +12,7 @@ app.use(
   cors({
     origin:
       env.NODE_ENV === "production"
-        ? "https://juscash-front-production.up.railway.app/"
+        ? "https://juscash-front-production.up.railway.app"
         : "http://localhost:3000",
     credentials: true,
   })

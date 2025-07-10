@@ -38,13 +38,13 @@ export async function authenticate(request: Request, response: Response) {
       .cookie("accessToken", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 1000 * 60 * 15,
       })
       .cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 1000 * 60 * 60 * 24 * 7,
       });
 
@@ -84,7 +84,7 @@ export async function refreshToken(request: Request, response: Response) {
     response.cookie("accessToken", newAccessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 1000 * 60 * 15,
     });
 
@@ -119,13 +119,13 @@ export async function logout(request: Request, response: Response) {
   response.clearCookie("accessToken", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "none",
   });
 
   response.clearCookie("refreshToken", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "none",
   });
 
   response.status(200).json({ message: "Logout realizado com sucesso" });
