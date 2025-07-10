@@ -5,9 +5,8 @@ import { makeAuthenticationUseCase } from "@/use-cases/factories/make-authentica
 import jwt from "jsonwebtoken";
 import { emailValidationSchema } from "@/use-cases/validations/user-zod-schemas";
 
-const JWT_SECRET =
-  process.env.JWT_SECRET ||
-  "83710e013bc64c1bcb977d116bbde675cfc8fdc50d076587f26c3d56d6fcdaa7";
+const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!;
 
 export async function authenticate(request: Request, response: Response) {
   const authenticateBodySchema = z.object({
@@ -25,17 +24,72 @@ export async function authenticate(request: Request, response: Response) {
       password,
     });
 
-    const token = jwt.sign({ userName: user.name }, JWT_SECRET, {
+    const accessToken = jwt.sign({ userName: user.name }, JWT_SECRET, {
       subject: user.id,
-      expiresIn: "3d",
+      expiresIn: "15m",
     });
 
-    response.status(200).json({ token });
+    const refreshToken = jwt.sign({ userName: user.name }, JWT_REFRESH_SECRET, {
+      subject: user.id,
+      expiresIn: "7d",
+    });
+
+    response
+      .cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 1000 * 60 * 15,
+      })
+      .cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 1000 * 60 * 60 * 24 * 7,
+      });
+
+    response.status(200).json({ message: "Usuário autenticado!" });
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
       response.status(400).json({ message: err.message });
     } else {
       throw err;
     }
+  }
+}
+
+export async function refreshToken(request: Request, response: Response) {
+  const refreshToken = request.cookies.refreshToken;
+
+  if (!refreshToken) {
+    response.status(401).json({ message: "Refresh token ausente." });
+    return;
+  }
+
+  try {
+    const payload = jwt.verify(refreshToken, JWT_REFRESH_SECRET) as {
+      sub: string;
+      userName: string;
+    };
+
+    const newAccessToken = jwt.sign(
+      { userName: payload.userName },
+      JWT_SECRET,
+      {
+        subject: payload.sub,
+        expiresIn: "15m",
+      }
+    );
+
+    response.cookie("accessToken", newAccessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 1000 * 60 * 15,
+    });
+
+    response.status(200).json({ message: "Access token renovado" });
+  } catch (err) {
+    response.status(401).json({ message: "Refresh token inválido" });
   }
 }
