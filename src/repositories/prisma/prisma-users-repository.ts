@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@/generated/prisma/client";
+import { Prisma, UserPostStatus } from "@/generated/prisma/client";
 
 import { UsersRepository } from "../users-repository";
 
@@ -30,5 +30,19 @@ export class PrismaUsersRepository implements UsersRepository {
     });
 
     return user;
+  }
+
+  findUserPostStatus(
+    postId: string,
+    userId: string
+  ): Promise<UserPostStatus | null> {
+    return prisma.userPostStatus.findUnique({
+      where: {
+        userId_postId: {
+          userId,
+          postId,
+        },
+      },
+    });
   }
 }

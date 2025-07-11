@@ -32,7 +32,14 @@ export async function saveLastDayPosts(request: Request, response: Response) {
 export async function getFirstPosts(request: Request, response: Response) {
   try {
     const getFirstPostsUseCase = makeGetFirstPostsUseCase();
-    const posts = await getFirstPostsUseCase.execute();
+    const userId = request.userId;
+
+    if (!userId) {
+      response.status(401).json({ message: "Usuário não autenticado" });
+      return;
+    }
+
+    const posts = await getFirstPostsUseCase.execute(userId);
     response.status(200).send({ ...posts });
   } catch (err) {
     console.log("erro no getFirstPosts:", err);
@@ -41,13 +48,18 @@ export async function getFirstPosts(request: Request, response: Response) {
 }
 
 export async function updatePostState(request: Request, response: Response) {
-  //Atualizando o estado do post
+  const userId = request.userId;
+
+  if (!userId) {
+    response.status(401).json({ message: "Usuário não autenticado" });
+    return;
+  }
 
   const { status, id } = request.body;
 
   try {
     const updatePostUseCase = makeUpdatePostUseCase();
-    const post = await updatePostUseCase.execute({ id, status });
+    const post = await updatePostUseCase.execute({ userId, id, status });
 
     response.status(200).send({ data: post });
   } catch (err) {
@@ -64,7 +76,12 @@ export async function updatePostState(request: Request, response: Response) {
 }
 
 export async function filterPosts(request: Request, response: Response) {
-  //Buscando os posts
+  const userId = request.userId;
+
+  if (!userId) {
+    response.status(401).json({ message: "Usuário não autenticado" });
+    return;
+  }
 
   const getPostsBodySchema = z.object({
     skip: z.coerce.number().optional().default(0),
@@ -86,6 +103,7 @@ export async function filterPosts(request: Request, response: Response) {
   try {
     const getPostsUseCase = makeGetPostsUseCase();
     const posts = await getPostsUseCase.execute({
+      userId,
       skip,
       take,
       startDate: startDate,

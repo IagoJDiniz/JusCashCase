@@ -8,8 +8,8 @@ interface GetFirstPostsUseCaseResponse {
 export class GetFirstPostsUseCase {
   constructor(private postsRepository: PostsRepository) {}
 
-  async execute(): Promise<GetFirstPostsUseCaseResponse> {
-    const posts = await this.postsRepository.getFirstThirtyPosts();
+  async execute(userId: string): Promise<GetFirstPostsUseCaseResponse> {
+    const posts = await this.postsRepository.getFirstThirtyPosts(userId);
 
     return {
       posts,
