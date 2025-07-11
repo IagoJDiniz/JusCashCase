@@ -7,7 +7,7 @@ import { RedisCacheRepository } from "@/cache/redis/redis-cache-repository";
 interface RegisterPostsUseCaseRequest {
   posts: {
     text: string;
-    numero_processo?: string;
+    numero_processo: string;
     autores: string[];
     advogados: string[];
     valor_principal_bruto_liquido?: string;

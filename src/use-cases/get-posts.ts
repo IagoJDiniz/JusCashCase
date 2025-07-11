@@ -3,6 +3,7 @@ import { Post } from "@/generated/prisma/client";
 import { parse, startOfDay } from "date-fns";
 
 interface GetPostsUseCaseRequest {
+  userId: string;
   skip?: number;
   take?: number;
   startDate?: Date;
@@ -18,6 +19,7 @@ export class GetPostsUseCase {
   constructor(private postsRepository: PostsRepository) {}
 
   async execute({
+    userId,
     skip = 0,
     take = 30,
     startDate,
@@ -25,6 +27,7 @@ export class GetPostsUseCase {
     textToSearch,
   }: GetPostsUseCaseRequest): Promise<GetPostsUseCaseResponse> {
     const posts = await this.postsRepository.find(
+      userId,
       skip,
       take,
       startDate,

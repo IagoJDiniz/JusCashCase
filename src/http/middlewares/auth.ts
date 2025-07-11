@@ -3,7 +3,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { env } from "@/env";
 
 interface AuthenticatedRequest extends Request {
-  user?: string | JwtPayload;
+  userId?: string;
 }
 
 function authenticateToken(
@@ -15,17 +15,17 @@ function authenticateToken(
 
   if (!token) {
     response.status(401).json({ message: "Token não fornecido" });
-    return;
   }
 
-  jwt.verify(token, env.JWT_SECRET, (err: any) => {
-    if (err) {
-      response.status(401).json({ message: "Token inválido" });
-      return;
-    } else {
-      next();
-    }
-  });
+  try {
+    const payload = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
+
+    request.userId = payload.sub as string;
+
+    next();
+  } catch (err) {
+    response.status(401).json({ message: "Token inválido" });
+  }
 }
 
 export default authenticateToken;
