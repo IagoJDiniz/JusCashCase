@@ -37,6 +37,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 🚀 Implementações para melhoria de performance
 
 - Indexação GIN no campo de texto postgres para acelerar a busca(Assim pude manter os dados mais organizados mas sem perder meu poder de busca)
+- Utilização de token por cookies http only para evitar roubos de token por javascript
 - Cacheamento da rota principal de listagem de publicações para que a página inicial carregue sempre rápido mesmo com muitos usuários carregando
 - Uso do Prisma e indexação para agilizar as requisições
 - Separação do script de scraping para facilitar troca do script para outra linguagem ou repositório se necessário
